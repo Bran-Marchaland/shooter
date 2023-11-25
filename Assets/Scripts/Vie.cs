@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Vie : MonoBehaviour
 {
 
 
     public int vie;
-    public int score;
+    public GameObject referenceplayer;
     public int scoreCoin;
     public int Coin;
+    public TextMeshProUGUI monUI;
+    
     // Start is called before the first frame update
     void Start()
     {
- 
+        
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
+
         if (collision.gameObject.tag != "hitbox" && collision.gameObject.tag != "bordureJoueur")
         {
             vie--;
@@ -28,34 +33,36 @@ public class Vie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (vie == 0)
+       
+
+        if (vie <= 0)
         {
-            if(gameObject.tag == "mob1")
+            if (gameObject.tag == "mob1")
             {
-                score = score + 100;
-                scoreCoin = scoreCoin + 100;
+                referenceplayer.GetComponent<MovementEtTir>().score += 100;
+                referenceplayer.GetComponent<MovementEtTir>().scoreCoin += 100;
             }
             if (gameObject.tag == "mob2")
             {
-                score = score + 200;
-                scoreCoin = scoreCoin + 100;
+                referenceplayer.GetComponent<MovementEtTir>().score += 200;
+                referenceplayer.GetComponent<MovementEtTir>().scoreCoin += 100;
             }
             if (gameObject.tag == "mob3")
             {
-                score = score + 500;
-                scoreCoin = scoreCoin + 100;
-            }
+                referenceplayer.GetComponent<MovementEtTir>().score += 500;
+                referenceplayer.GetComponent<MovementEtTir>().scoreCoin += 100;
 
-            if (scoreCoin >= 500)
+            }
+            if (referenceplayer.GetComponent<MovementEtTir>().scoreCoin >= 500)
             {
-                scoreCoin = scoreCoin - 500;
-                Coin = Coin + 1;
+                referenceplayer.GetComponent<MovementEtTir>().scoreCoin -= 500;
+                referenceplayer.GetComponent<MovementEtTir>().Coin += 1;
             }
 
             Destroy(gameObject);
+            
         }
-
+        
 
     }
-
 }

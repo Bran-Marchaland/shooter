@@ -181,3 +181,4 @@ MonoBehaviour:
   score: 100
   scoreCoin: 0
   Coin: 0
+  monUI: {fileID: 0}
